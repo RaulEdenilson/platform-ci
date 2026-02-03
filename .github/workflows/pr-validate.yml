@@ -35,7 +35,9 @@ jobs:
           echo "platform.yaml found ✅"
 
       - name: Stub schema validation
-        run: echo "Schema validation: OK (stub)"
+        run: |
+          echo "Schema validation: OK (stub)"
 
       - name: Stub policy checks
-        run: echo "Policy checks: OK (stub)"
+        run: |
+          echo "Policy checks: OK (stub)"
