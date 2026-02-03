@@ -1,0 +1,43 @@
+name: platform-pr-validate
+
+on:
+  workflow_call:
+    inputs:
+      service_path:
+        required: false
+        type: string
+        default: .
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout caller repository
+        uses: actions/checkout@v4
+
+      - name: Debug workspace
+        run: |
+          echo "PWD=$(pwd)"
+          echo "service_path=${{ inputs.service_path }}"
+          ls -la
+          echo "---- files (depth 3) ----"
+          find . -maxdepth 3 -type f -print
+
+      - name: Verify platform.yaml exists
+        working-directory: ${{ inputs.service_path }}
+        run: |
+          echo "Checking for platform.yaml in $(pwd)"
+          ls -la
+          test -f platform.yaml
+          echo "platform.yaml found ✅"
+
+      - name: Stub schema validation
+        run: |
+          echo "Schema validation: OK (stub)"
+
+      - name: Stub policy checks
+        run: |
+          echo "Policy checks: OK (stub)"
